@@ -4,7 +4,6 @@ const puppeteer = require("puppeteer");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -24,14 +23,15 @@ async function getAISummary(text) {
 async function scrapeAmazonProduct(url) {
     // const browser = await puppeteer.launch({ headless: true });
     const browser = await puppeteer.launch({
-        headless: "new",
+        headless: true,
         args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-gpu",
-            "--disable-dev-shm-usage"
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-gpu",
+          "--disable-dev-shm-usage",
+          "--disable-software-rasterizer"
         ]
-    });
+      });
     const page = await browser.newPage();
 
     try {
@@ -100,7 +100,8 @@ app.get("/scrape", async (req, res) => {
     }
 });
 
-// Start Server
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
 });
