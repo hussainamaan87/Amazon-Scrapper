@@ -30,9 +30,10 @@ async function scrapeAmazonProduct(url) {
           "--disable-setuid-sandbox",
           "--disable-gpu",
           "--disable-dev-shm-usage",
-          "--disable-software-rasterizer"
+          "--disable-software-rasterizer",
+          "--single-process"
         ]
-      });
+    });
     const page = await browser.newPage();
 
     try {
