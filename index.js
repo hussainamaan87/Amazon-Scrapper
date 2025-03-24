@@ -24,7 +24,7 @@ async function scrapeAmazonProduct(url) {
     // const browser = await puppeteer.launch({ headless: true });
     const browser = await puppeteer.launch({
         headless: true,
-        executablePath: '/opt/render/.cache/puppeteer/chrome/linux-134.0.6998.35/chrome-linux64/chrome',
+        executablePath: puppeteer.executablePath(),
         args: [
           "--no-sandbox",
           "--disable-setuid-sandbox",
